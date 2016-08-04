@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_white_1000"
+    android:orientation="vertical"
+    tools:context=".ui.BiometricFragment">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/biometric_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/biometric_switcher"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ExpandableListView
+                    android:id="@+id/biometric_item_list"
+                    android:background="@color/feed_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/biometric_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/no_biometric_placeholder" />
+            </ViewSwitcher>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/biomteric_add_manual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:clickable="true"
+                android:src="@drawable/ic_add_white_24dp"
+                app:backgroundTint="@color/md_red_500"
+                app:layout_anchor="@id/biometric_item_list"
+                app:layout_anchorGravity="bottom|right|end" />
+        </android.support.design.widget.CoordinatorLayout>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/biometric_from_date_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:drawableStart="@drawable/ic_date_range_white_24dp"
+                android:focusable="false"
+                android:hint="From Date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/md_white_1000"
+                android:textColorHint="@color/md_white_1000" />
+
+            <EditText
+                android:id="@+id/biometric_to_date_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:drawableStart="@drawable/ic_date_range_white_24dp"
+                android:focusable="false"
+                android:hint="To Date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/md_white_1000"
+                android:textColorHint="@color/md_white_1000" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/biomteric_filter"
+            style="@style/AppTheme.Accent.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>

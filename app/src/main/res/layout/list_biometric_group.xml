@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/md_blue_100"
+    android:padding="@dimen/padding_medium_15dp">
+
+    <TextView
+        android:id="@+id/list_biometric_date_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:paddingEnd="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:text="18-06-10"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+    <TextView
+        android:id="@+id/list_biometric_gross_hrs_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/rounded_corner"
+        android:paddingEnd="@dimen/padding_small_5dp"
+        android:paddingStart="@dimen/padding_small_5dp"
+        android:text="8:00"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/md_white_1000" />
+</RelativeLayout>

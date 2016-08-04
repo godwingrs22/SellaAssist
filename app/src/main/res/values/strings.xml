@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">SellaAssist</string>
+    <string name="splash_app_name">Sella Assist</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="app_description">SellaAssist is an app designed specially for BancaSella employees to view all events at one place</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="prompt_gbsid">GBS ID</string>
+    <string name="prompt_name">Name</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_password">Password cannot be empty</string>
+    <string name="error_network_info">No network connection available</string>
+    <string name="error_incorrect_credentials">GBSID or Password is Incorrect</string>
+    <string name="error_register_failed">Unable to register at the moment</string>
+    <string name="error_profile_photo_required">Please select a profile photo</string>
+    <string name="error_gbs_field_required">GBS ID cannot be empty</string>
+    <string name="error_name_field_required">Name cannot be empty</string>
+    <string name="error_password_field_required">Password cannot be empty</string>
+    <string name="demo_email">demo@sella.it</string>
+    <string name="demo_password">12345</string>
+    <string name="action_register">Register</string>
+    <string name="action_login">Login</string>
+
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_main">SellaAssist</string>
+
+    <string name="navigation_header_gbsid">Demo</string>
+    <string name="navigation_header_email">demo@sella.it</string>
+    <string name="action_logout">logout</string>
+    <string name="write_permission">Write permissions are needed for storing data</string>
+    <string name="camera_permission">Camera permissions are needed taking profile picture</string>
+    <string name="read_permission">Read permissions are needed for reading data</string>
+    <string name="permission_needed">Permissions Needed</string>
+    <string name="permission_desc">Sella Assist needs certain permissions to work effectively.Review the permissions in Settings:</string>
+    <string name="title_activity_permission">Permissions</string>
+    <string name="action_exit">EXIT</string>
+    <string name="action_continue">CONTINUE</string>
+    <string name="image_desc">Image</string>
+    <string name="title_activity_fullscreen">SellaAssist</string>
+
+    <string name="bullet" translatable="false">&#8226;</string>
+    <string name="title_activity_detail_event">SellaAssist</string>
+    <string name="title_activity_biometric_add">Add Biometric Manually</string>
+
+    <string name="prompt_location">Location</string>
+    <string name="action_add">Add</string>
+
+    <string name="sync_account_type">sellaassist.sella.it</string>
+    <string name="content_authority">it.sella.sellaassist.app</string>
+
+    <string name="prompt_businessunit">Business Unit</string>
+    <string name="error_business_unit_failed">Please select a business unit</string>
+
+    <string-array name="choose_businessUnit">
+        <item>Business unit</item>
+        <item>Racolta</item>
+        <item>HR</item>
+        <item>Architecture</item>
+        <item>Guest</item>
+        <item>Sella Branch</item>
+    </string-array>
+</resources>

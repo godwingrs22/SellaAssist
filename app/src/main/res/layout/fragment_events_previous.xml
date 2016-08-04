@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_white_1000"
+    android:orientation="vertical"
+    tools:context=".ui.PreviousEventsFragment">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/events_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/previous_events_switcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/events_item_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/feed_bg"
+                android:divider="@null" />
+
+            <ImageView
+                android:id="@+id/previous_events_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/no_events_placeholder" />
+        </ViewSwitcher>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>
