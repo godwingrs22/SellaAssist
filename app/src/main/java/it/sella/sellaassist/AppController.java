@@ -72,12 +72,11 @@ public class AppController extends Application {
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
-               /* for (Region region : SELLA_BEACON_REGION) {
+                for (Region region : SELLA_BEACON_REGION) {
                     beaconManager.startMonitoring(region);
-                }*/
+                }
             }
         });
-
     }
 
     private void addBiometric(Biometric biometric, BiometricInfo biometricInfo) {
