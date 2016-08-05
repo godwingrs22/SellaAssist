@@ -40,15 +40,15 @@ public class FeedsManager {
                 .build();
         try {
             URL url = new URL(builtUri.toString());
-            final String feedData = httpClient.getResponse(url, HttpClient.HTTP_GET, null, HttpClient.TIMEOUT);
-            isSuccess = getFeedDataFromJson(feedData);
+            final String feedData = httpClient.getResponse(url, HttpClient.HTTP_GET, null, 0);
+            isSuccess = getFeedDataFromJson(feedData,gbsCode);
         } catch (Exception e) {
             Log.e(TAG, "Exception ", e);
         }
         return isSuccess;
     }
 
-    private boolean getFeedDataFromJson(final String data) {
+    private boolean getFeedDataFromJson(final String data, String gbsCode) {
         final String FEED_LIST = "announcements";
         final String FEED_ID = "id";
         final String FEED_MESSAGE_LIST = "messages";
@@ -102,6 +102,7 @@ public class FeedsManager {
 
                             ContentValues messageFeedValues = new ContentValues();
                             messageFeedValues.put(SellaAssistContract.FeedEntry.COLUMN_FEED_ID, id);
+                            messageFeedValues.put(SellaAssistContract.FeedEntry.COLUMN_GBS_ID, gbsCode);
                             messageFeedValues.put(SellaAssistContract.FeedEntry.COLUMN_CREATED_BY_NAME, createdByName);
                             messageFeedValues.put(SellaAssistContract.FeedEntry.COLUMN_PROFILE_PIC, profileImage);
                             messageFeedValues.put(SellaAssistContract.FeedEntry.COLUMN_START_TIMESTAMP, startTimestamp);

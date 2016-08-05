@@ -24,9 +24,11 @@ import android.widget.ViewSwitcher;
 
 import it.sella.sellaassist.R;
 import it.sella.sellaassist.adapter.FeedsAdapter;
+import it.sella.sellaassist.data.SellaAssistContract;
 import it.sella.sellaassist.data.SellaAssistContract.FeedEntry;
 import it.sella.sellaassist.model.User;
 import it.sella.sellaassist.sync.SellaAssistSyncAdapter;
+import it.sella.sellaassist.util.SellaCache;
 import it.sella.sellaassist.util.Utility;
 
 /**
@@ -42,31 +44,6 @@ public class FeedsFragment extends Fragment implements LoaderManager.LoaderCallb
     private static final int FEED_LOADER = 0;
     private ContentObserver mObserver;
     private ViewSwitcher viewSwitcher;
-
-    private static final String[] FEED_COLUMNS = {
-            FeedEntry._ID,
-            FeedEntry.COLUMN_FEED_ID,
-            FeedEntry.COLUMN_CREATED_BY_NAME,
-            FeedEntry.COLUMN_PROFILE_PIC,
-            FeedEntry.COLUMN_START_TIMESTAMP,
-            FeedEntry.COLUMN_IT_AREA,
-            FeedEntry.COLUMN_IS_IMPORTANT,
-            FeedEntry.COLUMN_MESSAGE,
-            FeedEntry.COLUMN_IMAGE,
-            FeedEntry.COLUMN_URL
-    };
-
-    public static final int COLUMN_ID = 0;
-    public static final int COLUMN_FEED_ID = 1;
-    public static final int COLUMN_CREATED_BY_NAME = 2;
-    public static final int COLUMN_PROFILE_PIC = 3;
-    public static final int COLUMN_START_TIMESTAMP = 4;
-    public static final int COLUMN_IT_AREA = 5;
-    public static final int COLUMN_IS_IMPORTANT = 6;
-    public static final int COLUMN_MESSAGE = 7;
-    public static final int COLUMN_IMAGE = 8;
-    public static final int COLUMN_URL = 9;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -141,9 +118,9 @@ public class FeedsFragment extends Fragment implements LoaderManager.LoaderCallb
 
         return new CursorLoader(getActivity(),
                 feedUri,
-                null,
-                null,
-                null,
+                FeedEntry.FEED_PROJECTIONS,
+                SellaAssistContract.UserEntry.COLUMN_GBS_ID + " =?",
+                new String[]{SellaCache.getCache(Utility.USER_KEY, "", getContext())},
                 FeedEntry.COLUMN_FEED_ID + " DESC");
     }
 

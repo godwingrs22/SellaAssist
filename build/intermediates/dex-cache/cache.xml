@@ -1,3 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.4.0_22827a043ff78a7862a419e9c3d5b6a6a2807b36.jar" />
+    </item>
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\exploded-aar\com.estimote\sdk\0.10.8\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="640af651fe94032b8f34112aabd351df29d3e2df">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\com.estimote-sdk-0.10.8_5a6e08344ce4444a589222342cf30bd37549403d.jar" />
+    </item>
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_484134d99858a71f49669e808412383d2bfe49eb.jar" />
+    </item>
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.4.0_7b342fbee5c938d452323828ddc3764e28cc3701.jar" />
+    </item>
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_9a63572b6e30fff5405b176f204b6a4f33aac77a.jar" />
+    </item>
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.4.0_4c582b91282074a56b5c8412fcaadd20ce845191.jar" />
+    </item>
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\com.android.support-cardview-v7-23.4.0_6ec48ad976115164c66e7cc1b0100318f535fb9a.jar" />
+    </item>
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.4.0_0a52d663ddfee71c85519fade3b96f6ecc0e1647.jar" />
+    </item>
+    <item
+        jar="D:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_6c2a284fdd61d0d8ac24aa3991d9cfbc35ef85c7.jar" />
+    </item>
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="711fde3b0b489c256e773f381403446527ed0188">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_cb68854db20e69acc29f9d32cdeddf2a57957e02.jar" />
+    </item>
+    <item
+        jar="C:\Users\GodwinRoseSamuel\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\picasso-2.5.2_cce4ce9eb303c9547afdeeed2692ab43454dd8d6.jar" />
+    </item>
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="031e8b3ab2df4ab43b1017f84417d7e10dfbb8d2">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\de.hdodenhof-circleimageview-2.0.0_9fc6940a1e87b962f076daeb6bfe98b6174d7253.jar" />
+    </item>
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_a589a7492114982d2ab4d492ad129362169fa39b.jar" />
+    </item>
+    <item
+        jar="F:\Projects\SellaAssist\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="24.0.1"
+        sha1="6a076def71d41895429dc183e0e28618bf481a05">
+        <dex dex="F:\Projects\SellaAssist\app\build\intermediates\pre-dexed\debug\instant-run_acfb967a11a3cc823babadfc658764b704579037.jar" />
+    </item>
+
+</items>

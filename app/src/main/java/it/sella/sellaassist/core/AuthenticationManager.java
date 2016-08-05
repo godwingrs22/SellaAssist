@@ -81,18 +81,18 @@ public class AuthenticationManager {
     }
 
     public boolean doRegister(User user, BusinessUnit businessUnit, Bitmap bitmap) {
-        boolean isSuccess = false;
+      /*  boolean isSuccess = false;
         try {
             URL url = new URL(ServerUtils.getRegisterURL());
             String input = buildRegisterJSONInput(user, businessUnit, bitmap);
-            String response = httpClient.getResponse(url, HttpClient.HTTP_POST, input, HttpClient.TIMEOUT);
+            String response = httpClient.getResponse(url, HttpClient.HTTP_POST, input, 0);
             isSuccess = isRegisterSuccessful(response);
         } catch (Exception e) {
             Log.e(TAG, "Exception ", e);
             isSuccess = false;
         }
-        return isSuccess;
-//        return true;
+        return isSuccess;*/
+        return true;
     }
 
     public boolean doLogin(String gbsID, String password) {

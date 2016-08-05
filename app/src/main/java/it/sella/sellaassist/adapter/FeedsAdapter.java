@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import it.sella.sellaassist.R;
-import it.sella.sellaassist.ui.FeedsFragment;
+import it.sella.sellaassist.data.SellaAssistContract;
 import it.sella.sellaassist.ui.FullScreenImageActivity;
 import it.sella.sellaassist.util.Utility;
 
@@ -87,7 +87,7 @@ public class FeedsAdapter extends RecyclerViewCursorAdapter<FeedsAdapter.FeedVie
         }
 
         public void bindData(final Context context, final Cursor cursor) {
-            String createdByName = cursor.getString(FeedsFragment.COLUMN_CREATED_BY_NAME);
+            String createdByName = cursor.getString(SellaAssistContract.FeedEntry.FEED_CREATED_BY_NAME);
 
             if (createdByName != null) {
                 this.createByName.setText(createdByName);
@@ -96,7 +96,7 @@ public class FeedsAdapter extends RecyclerViewCursorAdapter<FeedsAdapter.FeedVie
                 this.createByName.setVisibility(View.GONE);
             }
 
-            String startTimestamp = cursor.getString(FeedsFragment.COLUMN_START_TIMESTAMP);
+            String startTimestamp = cursor.getString(SellaAssistContract.FeedEntry.FEED_START_TIMESTAMP);
 
             if (startTimestamp != null) {
                 this.startTimestamp.setText(Utility.getFeedTimeStamp(startTimestamp));
@@ -105,7 +105,7 @@ public class FeedsAdapter extends RecyclerViewCursorAdapter<FeedsAdapter.FeedVie
                 this.startTimestamp.setVisibility(View.GONE);
             }
 
-            String itArea = cursor.getString(FeedsFragment.COLUMN_IT_AREA);
+            String itArea = cursor.getString(SellaAssistContract.FeedEntry.FEED_IT_AREA);
 
             if (itArea != null) {
                 this.itArea.setText(itArea);
@@ -114,15 +114,15 @@ public class FeedsAdapter extends RecyclerViewCursorAdapter<FeedsAdapter.FeedVie
                 this.itArea.setText("IT Racolta");
             }
 
-            if (Boolean.parseBoolean(cursor.getString(FeedsFragment.COLUMN_IS_IMPORTANT))) {
+            if (Boolean.parseBoolean(cursor.getString(SellaAssistContract.FeedEntry.FEED_IS_IMPORTANT))) {
                 this.important.setVisibility(View.VISIBLE);
             } else {
                 this.important.setVisibility(View.GONE);
             }
 
-            this.message.setText(cursor.getString(FeedsFragment.COLUMN_MESSAGE));
+            this.message.setText(cursor.getString(SellaAssistContract.FeedEntry.FEED_MESSAGE));
 
-            String url = cursor.getString(FeedsFragment.COLUMN_URL);
+            String url = cursor.getString(SellaAssistContract.FeedEntry.FEED_URL);
 
             if (url != null) {
                 this.url.setText(Html.fromHtml("<a href=\"" + url + "\">" + url + "</a> "));
@@ -132,7 +132,7 @@ public class FeedsAdapter extends RecyclerViewCursorAdapter<FeedsAdapter.FeedVie
                 this.url.setVisibility(View.GONE);
             }
 
-            String profileImage = cursor.getString(FeedsFragment.COLUMN_PROFILE_PIC);
+            String profileImage = cursor.getString(SellaAssistContract.FeedEntry.FEED_PROFILE_PIC);
 
             if (profileImage != null) {
                 Picasso.with(context)
@@ -145,7 +145,7 @@ public class FeedsAdapter extends RecyclerViewCursorAdapter<FeedsAdapter.FeedVie
                 this.profileImage.setVisibility(View.GONE);
             }
 
-            final String image = cursor.getString(FeedsFragment.COLUMN_IMAGE);
+            final String image = cursor.getString(SellaAssistContract.FeedEntry.FEED_IMAGE);
 
             if (image != null) {
                 Picasso.with(context)

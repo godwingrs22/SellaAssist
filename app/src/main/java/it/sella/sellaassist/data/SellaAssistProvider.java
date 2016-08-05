@@ -69,8 +69,15 @@ public class SellaAssistProvider extends ContentProvider {
         userQueryBuilder = new SQLiteQueryBuilder();
         eventQueryBuilder = new SQLiteQueryBuilder();
 
-        feedQueryBuilder.setTables(FeedEntry.TABLE_NAME);
         userQueryBuilder.setTables(UserEntry.TABLE_NAME);
+        feedQueryBuilder.setTables(
+                FeedEntry.TABLE_NAME +
+                        " INNER JOIN " + UserEntry.TABLE_NAME +
+                        " ON " + FeedEntry.TABLE_NAME +
+                        "." + FeedEntry.COLUMN_GBS_ID +
+                        " = " + UserEntry.TABLE_NAME +
+                        "." + UserEntry.COLUMN_GBS_ID);
+
         eventQueryBuilder.setTables(EventEntry.TABLE_NAME);
     }
 

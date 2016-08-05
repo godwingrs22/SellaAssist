@@ -12,7 +12,7 @@ import it.sella.sellaassist.data.SellaAssistContract.UserEntry;
 
 public class SellaAssistDBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 33;
+    private static final int DATABASE_VERSION = 40;
     static final String DATABASE_NAME = "sellaassist.db";
 
     public SellaAssistDBHelper(Context context) {
@@ -36,6 +36,7 @@ public class SellaAssistDBHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_FEED_TABLE = "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +
                 FeedEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 FeedEntry.COLUMN_FEED_ID + " INTEGER NOT NULL,  " +
+                FeedEntry.COLUMN_GBS_ID + " TEXT NOT NULL,  " +
                 FeedEntry.COLUMN_CREATED_BY_NAME + " TEXT NOT NULL,  " +
                 FeedEntry.COLUMN_PROFILE_PIC + " TEXT NOT NULL, " +
                 FeedEntry.COLUMN_START_TIMESTAMP + " TEXT NOT NULL, " +
@@ -44,7 +45,9 @@ public class SellaAssistDBHelper extends SQLiteOpenHelper {
                 FeedEntry.COLUMN_MESSAGE + " TEXT, " +
                 FeedEntry.COLUMN_IMAGE + " TEXT, " +
                 FeedEntry.COLUMN_URL + " TEXT, " +
-                " UNIQUE (" + FeedEntry.COLUMN_FEED_ID + ") ON CONFLICT REPLACE);";
+                " UNIQUE (" + FeedEntry.COLUMN_FEED_ID + ") ON CONFLICT REPLACE, " +
+                " FOREIGN KEY (" + FeedEntry.COLUMN_GBS_ID + ") REFERENCES " +
+                UserEntry.TABLE_NAME + " (" + UserEntry.COLUMN_GBS_ID + "))";
 
         final String SQL_CREATE_BIOMETRIC_TABLE = "CREATE TABLE " + BiometricEntry.TABLE_NAME + " (" +
                 BiometricEntry._ID + " TEXT PRIMARY KEY, " +

@@ -74,6 +74,7 @@ public class SellaAssistContract {
 
         public static final String TABLE_NAME = "feed";
         public static final String COLUMN_FEED_ID = "feed_id";
+        public static final String COLUMN_GBS_ID = "gbsID";
         public static final String COLUMN_CREATED_BY_NAME = "createdByName";
         public static final String COLUMN_PROFILE_PIC = "profileImage";
         public static final String COLUMN_START_TIMESTAMP = "startTimestamp";
@@ -82,6 +83,33 @@ public class SellaAssistContract {
         public static final String COLUMN_MESSAGE = "message";
         public static final String COLUMN_IMAGE = "image";
         public static final String COLUMN_URL = "url";
+
+        public static final String[] FEED_PROJECTIONS = {
+                FeedEntry._ID,
+                FeedEntry.COLUMN_FEED_ID,
+                FeedEntry.COLUMN_GBS_ID,
+                FeedEntry.COLUMN_CREATED_BY_NAME,
+                FeedEntry.COLUMN_PROFILE_PIC,
+                FeedEntry.COLUMN_START_TIMESTAMP,
+                FeedEntry.COLUMN_IT_AREA,
+                FeedEntry.COLUMN_IS_IMPORTANT,
+                FeedEntry.COLUMN_MESSAGE,
+                FeedEntry.COLUMN_IMAGE,
+                FeedEntry.COLUMN_URL
+        };
+
+        public static final int FEED_ID = 0;
+        public static final int FEED_FEED_ID = 1;
+        public static final int FEED_GBS_ID = 2;
+        public static final int FEED_CREATED_BY_NAME = 3;
+        public static final int FEED_PROFILE_PIC = 4;
+        public static final int FEED_START_TIMESTAMP = 5;
+        public static final int FEED_IT_AREA = 6;
+        public static final int FEED_IS_IMPORTANT = 7;
+        public static final int FEED_MESSAGE =8;
+        public static final int FEED_IMAGE = 9;
+        public static final int FEED_URL = 10;
+
 
         public static Uri buildFeedUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
