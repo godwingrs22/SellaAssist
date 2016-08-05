@@ -28,7 +28,7 @@ import it.sella.sellaassist.util.Utility;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = RegisterActivity.class.getSimpleName();
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private AutoCompleteTextView gbsIdView;
     private EditText passwordView;
     private Button registerButton;
@@ -158,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
             user.setProfilePic(userCursor.getString(SellaAssistContract.UserEntry.USER_PROFILE_PIC));
             user.setDeviceId(userCursor.getString(SellaAssistContract.UserEntry.USER_DEVICEID));
             user.setLoggedIn(Boolean.parseBoolean(userCursor.getString(SellaAssistContract.UserEntry.USER_LOGGED_IN)));
-            user.setBusinessUnit(userCursor.getString(SellaAssistContract.UserEntry.USER_BUSINESS_UNIT));
+            user.setBusinessUnitName(userCursor.getString(SellaAssistContract.UserEntry.USER_BUSINESS_UNIT_NAME));
 
             if (gbsID.equalsIgnoreCase(user.getGbsID()) && password.equals(user.getPassword())) {
                 Log.v(TAG, "<-----User valid---->");

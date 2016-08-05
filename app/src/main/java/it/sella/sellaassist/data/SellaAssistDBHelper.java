@@ -12,7 +12,7 @@ import it.sella.sellaassist.data.SellaAssistContract.UserEntry;
 
 public class SellaAssistDBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 31;
+    private static final int DATABASE_VERSION = 33;
     static final String DATABASE_NAME = "sellaassist.db";
 
     public SellaAssistDBHelper(Context context) {
@@ -30,7 +30,7 @@ public class SellaAssistDBHelper extends SQLiteOpenHelper {
                 UserEntry.COLUMN_PROFILE_PIC + " TEXT NOT NULL, " +
                 UserEntry.COLUMN_DEVICEID + " TEXT NOT NULL, " +
                 UserEntry.COLUMN_LOGGED_IN + " TEXT NOT NULL, " +
-                UserEntry.COLUMN_BUSINESS_UNIT + " TEXT NOT NULL, " +
+                UserEntry.COLUMN_BUSINESS_UNIT_NAME + " TEXT NOT NULL, " +
                 " UNIQUE (" + UserEntry.COLUMN_GBS_ID + ") ON CONFLICT REPLACE);";
 
         final String SQL_CREATE_FEED_TABLE = "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +

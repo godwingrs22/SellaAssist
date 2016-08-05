@@ -39,10 +39,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import it.sella.sellaassist.R;
 import it.sella.sellaassist.core.AuthenticationManager;
 import it.sella.sellaassist.data.SellaAssistContract;
+import it.sella.sellaassist.model.BusinessUnit;
 import it.sella.sellaassist.model.User;
 import it.sella.sellaassist.util.Utility;
 
@@ -63,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
     private AuthenticationManager authenticationManager;
     private Spinner businessUnitChooser;
     private Handler handler;
+    private Map<String, BusinessUnit> businessUnits;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,12 +88,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    final List<String> businessList = authenticationManager.getBusinessUnit();
-
+                    businessUnits = authenticationManager.getBusinessUnit();
+                    final List<String> businessUnitNames = new ArrayList<>(businessUnits.keySet());
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            ArrayAdapter<String> businessUnitAdapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_spinner_item, businessList);
+                            ArrayAdapter<String> businessUnitAdapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_spinner_item, businessUnitNames);
                             businessUnitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             businessUnitChooser.setAdapter(businessUnitAdapter);
                         }
@@ -148,11 +151,11 @@ public class RegisterActivity extends AppCompatActivity {
         String gbsID = gbsIdView.getText().toString();
         String name = nameView.getText().toString();
         String password = passwordView.getText().toString();
-        String businessUnit = String.valueOf(businessUnitChooser.getSelectedItem());
+        String businessUnitName = String.valueOf(businessUnitChooser.getSelectedItem());
 
-        if (businessUnit != null && !"".equalsIgnoreCase(businessUnit) && !AuthenticationManager.BUSINESS_UNIT.equalsIgnoreCase(businessUnit)) {
+        if (businessUnitName != null && !"".equalsIgnoreCase(businessUnitName) && !AuthenticationManager.BUSINESS_UNIT.equalsIgnoreCase(businessUnitName)) {
             if (Utility.isInternetConnected(this)) {
-                UserRegisterTask userRegisterTask = new UserRegisterTask(gbsID, name, password, selectedImageUri, businessUnit);
+                UserRegisterTask userRegisterTask = new UserRegisterTask(gbsID, name, password, selectedImageUri, businessUnits.get(businessUnitName));
                 userRegisterTask.execute();
             } else {
                 Snackbar.make(registerActivity, getString(R.string.error_network_info), Snackbar.LENGTH_LONG).show();
@@ -168,9 +171,9 @@ public class RegisterActivity extends AppCompatActivity {
         private final String name;
         private final String password;
         private final Uri selectedImageUri;
-        private final String businessUnit;
+        private final BusinessUnit businessUnit;
 
-        UserRegisterTask(String gbsId, String name, String password, Uri selectedImageUri, String businessUnit) {
+        UserRegisterTask(String gbsId, String name, String password, Uri selectedImageUri, BusinessUnit businessUnit) {
             this.gbsId = gbsId;
             this.name = name;
             this.password = password;
@@ -209,17 +212,17 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private User registerUser(String gbsId, String name, String password, Uri selectedImageUri, String businessUnit) {
+    private User registerUser(String gbsId, String name, String password, Uri selectedImageUri, BusinessUnit businessUnit) {
         User user = new User(Parcel.obtain());
         user.setGbsID(gbsId);
         user.setName(name);
         user.setPassword(password);
         user.setProfilePic(String.valueOf(selectedImageUri));
         user.setDeviceId(Utility.getDeviceId(RegisterActivity.this));
-        user.setBusinessUnit(businessUnit);
+        user.setBusinessUnitName(businessUnit.getName());
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-            if (authenticationManager.doRegister(user, bitmap)) {
+            if (authenticationManager.doRegister(user, businessUnit, bitmap)) {
                 Log.v(TAG, "<-----user registered---->" + user);
                 user.setLoggedIn(true);
                 addUser(user);
@@ -253,7 +256,7 @@ public class RegisterActivity extends AppCompatActivity {
             userValues.put(SellaAssistContract.UserEntry.COLUMN_PROFILE_PIC, user.getProfilePic());
             userValues.put(SellaAssistContract.UserEntry.COLUMN_DEVICEID, user.getDeviceId());
             userValues.put(SellaAssistContract.UserEntry.COLUMN_LOGGED_IN, String.valueOf(user.isLoggedIn()));
-            userValues.put(SellaAssistContract.UserEntry.COLUMN_BUSINESS_UNIT, user.getBusinessUnit());
+            userValues.put(SellaAssistContract.UserEntry.COLUMN_BUSINESS_UNIT_NAME, user.getBusinessUnitName());
 
             Uri insertedUri = getContentResolver().insert(SellaAssistContract.UserEntry.CONTENT_URI, userValues);
 

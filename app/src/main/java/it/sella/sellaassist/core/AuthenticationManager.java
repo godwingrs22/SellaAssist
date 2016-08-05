@@ -1,6 +1,7 @@
 package it.sella.sellaassist.core;
 
 import android.graphics.Bitmap;
+import android.os.Parcel;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -8,11 +9,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import it.sella.sellaassist.AppController;
 import it.sella.sellaassist.http.HttpClient;
+import it.sella.sellaassist.model.BusinessUnit;
 import it.sella.sellaassist.model.User;
 import it.sella.sellaassist.util.ServerUtils;
 import it.sella.sellaassist.util.Utility;
@@ -28,7 +31,7 @@ public class AuthenticationManager {
 
     public static final String BUSINESS_UNIT = "Business unit";
 
-    public List<String> getBusinessUnit() {
+    public Map<String, BusinessUnit> getBusinessUnit() {
         String response = null;
         try {
             URL url = new URL(ServerUtils.getBusinessUnitURL());
@@ -39,14 +42,19 @@ public class AuthenticationManager {
         return getBusinessUnitFromJson(response);
     }
 
-    private List<String> getBusinessUnitFromJson(String response) {
+    private Map<String, BusinessUnit> getBusinessUnitFromJson(String response) {
         final String BUSINESS_UNIT_STATUS = "status";
         final String BUSINESS_UNIT_CODE = "code";
         final String BUSINESS_UNIT_PROFILES = "profiles";
+        final String BUSINESS_UNIT_PROFILE_ID = "id";
         final String BUSINESS_UNIT_PROFILE_NAME = "name";
+        final String BUSINESS_UNIT_PROFILE_OWNER_ID = "owner";
 
-        List<String> businessUnitList = new ArrayList<>();
-        businessUnitList.add(BUSINESS_UNIT);
+        Map<String, BusinessUnit> businessUnitMap = new LinkedHashMap<>();
+        BusinessUnit headerBusinessUnit = new BusinessUnit(Parcel.obtain());
+        headerBusinessUnit.setId(0);
+        headerBusinessUnit.setName(BUSINESS_UNIT);
+        businessUnitMap.put(BUSINESS_UNIT, headerBusinessUnit);
 
         try {
             JSONObject responseJSON = new JSONObject(response);
@@ -57,7 +65,11 @@ public class AuthenticationManager {
                 if (profileList != null) {
                     for (int i = 0; i < profileList.length(); i++) {
                         JSONObject profileJson = (JSONObject) profileList.get(i);
-                        businessUnitList.add(profileJson.getString(BUSINESS_UNIT_PROFILE_NAME));
+                        BusinessUnit businessUnit = new BusinessUnit(Parcel.obtain());
+                        businessUnit.setId(profileJson.getInt(BUSINESS_UNIT_PROFILE_ID));
+                        businessUnit.setName(profileJson.getString(BUSINESS_UNIT_PROFILE_NAME));
+                        businessUnit.setOwnerId(profileJson.getString(BUSINESS_UNIT_PROFILE_OWNER_ID));
+                        businessUnitMap.put(businessUnit.getName(), businessUnit);
                     }
                 }
             }
@@ -65,14 +77,14 @@ public class AuthenticationManager {
         } catch (Exception e) {
             Log.e(TAG, "Exception ", e);
         }
-        return businessUnitList;
+        return businessUnitMap;
     }
 
-    public boolean doRegister(User user, Bitmap bitmap) {
-      boolean isSuccess = false;
+    public boolean doRegister(User user, BusinessUnit businessUnit, Bitmap bitmap) {
+        boolean isSuccess = false;
         try {
             URL url = new URL(ServerUtils.getRegisterURL());
-            String input = buildRegisterJSONInput(user, bitmap);
+            String input = buildRegisterJSONInput(user, businessUnit, bitmap);
             String response = httpClient.getResponse(url, HttpClient.HTTP_POST, input, HttpClient.TIMEOUT);
             isSuccess = isRegisterSuccessful(response);
         } catch (Exception e) {
@@ -97,14 +109,14 @@ public class AuthenticationManager {
         return isSuccess;
     }
 
-    private String buildRegisterJSONInput(User user, Bitmap bitmap) {
+    private String buildRegisterJSONInput(User user, BusinessUnit businessUnit, Bitmap bitmap) {
         final String REGISTER_USERCODE = "userCode";
         final String REGISTER_DEVICE_ID = "userDeviceId";
         final String REGISTER_BEACON_ID = "deviceId";
         final String REGISTER_USERNAME = "userName";
         final String REGISTER_PASSWORD = "password";
         final String REGISTER_PROFILE_IMAGE = "imgByte64Code";
-        final String REGISTER_BUSINESS_UNIT = "businessUnit";
+        final String REGISTER_BUSINESS_UNIT_ID = "businessUnit";
 
         JSONObject registerJSON = new JSONObject();
         try {
@@ -114,7 +126,7 @@ public class AuthenticationManager {
             registerJSON.put(REGISTER_USERNAME, user.getName());
             registerJSON.put(REGISTER_PASSWORD, user.getPassword());
             registerJSON.put(REGISTER_PROFILE_IMAGE, Utility.imageToBase64(bitmap));
-            registerJSON.put(REGISTER_BUSINESS_UNIT, user.getBusinessUnit());
+            registerJSON.put(REGISTER_BUSINESS_UNIT_ID, businessUnit.getId());
         } catch (JSONException e) {
             Log.e(TAG, "Exception ", e);
         }

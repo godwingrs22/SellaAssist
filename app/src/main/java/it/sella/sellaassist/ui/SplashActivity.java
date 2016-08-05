@@ -74,7 +74,7 @@ public class SplashActivity extends AppCompatActivity {
                 user.setProfilePic(cursor.getString(SellaAssistContract.UserEntry.USER_PROFILE_PIC));
                 user.setDeviceId(cursor.getString(SellaAssistContract.UserEntry.USER_DEVICEID));
                 user.setLoggedIn(Boolean.parseBoolean(cursor.getString(SellaAssistContract.UserEntry.USER_LOGGED_IN)));
-                user.setBusinessUnit(cursor.getString(SellaAssistContract.UserEntry.USER_BUSINESS_UNIT));
+                user.setBusinessUnitName(cursor.getString(SellaAssistContract.UserEntry.USER_BUSINESS_UNIT_NAME));
 
                 Log.v(TAG, "<----user---->" + user);
                 return user;

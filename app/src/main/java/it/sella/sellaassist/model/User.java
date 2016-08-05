@@ -13,7 +13,7 @@ public class User implements Parcelable {
     private String profilePic;
     private String deviceId;
     private boolean isLoggedIn;
-    private String businessUnit;
+    private String businessUnitName;
 
     public User(Parcel in) {
         gbsID = in.readString();
@@ -22,7 +22,7 @@ public class User implements Parcelable {
         profilePic = in.readString();
         deviceId = in.readString();
         isLoggedIn = in.readByte() != 0;
-        businessUnit = in.readString();
+        businessUnitName = in.readString();
     }
 
     @Override
@@ -33,7 +33,7 @@ public class User implements Parcelable {
         dest.writeString(profilePic);
         dest.writeString(deviceId);
         dest.writeByte((byte) (isLoggedIn ? 1 : 0));
-        dest.writeString(businessUnit);
+        dest.writeString(businessUnitName);
     }
 
     @Override
@@ -101,12 +101,12 @@ public class User implements Parcelable {
         isLoggedIn = loggedIn;
     }
 
-    public String getBusinessUnit() {
-        return businessUnit;
+    public String getBusinessUnitName() {
+        return businessUnitName;
     }
 
-    public void setBusinessUnit(String businessUnit) {
-        this.businessUnit = businessUnit;
+    public void setBusinessUnitName(String businessUnitName) {
+        this.businessUnitName = businessUnitName;
     }
 
     @Override
@@ -118,7 +118,7 @@ public class User implements Parcelable {
                 ", profilePic='" + profilePic + '\'' +
                 ", deviceId='" + deviceId + '\'' +
                 ", isLoggedIn=" + isLoggedIn +
-                ", businessUnit='" + businessUnit + '\'' +
+                ", businessUnitName='" + businessUnitName + '\'' +
                 '}';
     }
 }

@@ -32,7 +32,7 @@ public class SellaAssistContract {
         public static final String COLUMN_PROFILE_PIC = "profilePic";
         public static final String COLUMN_DEVICEID = "deviceID";
         public static final String COLUMN_LOGGED_IN = "loginStatus";
-        public static final String COLUMN_BUSINESS_UNIT = "businessUnit";
+        public static final String COLUMN_BUSINESS_UNIT_NAME = "businessUnitName";
 
         public static final String[] USER_PROJECTION = {
                 UserEntry._ID,
@@ -42,7 +42,7 @@ public class SellaAssistContract {
                 UserEntry.COLUMN_PROFILE_PIC,
                 UserEntry.COLUMN_DEVICEID,
                 UserEntry.COLUMN_LOGGED_IN,
-                UserEntry.COLUMN_BUSINESS_UNIT
+                UserEntry.COLUMN_BUSINESS_UNIT_NAME
         };
 
         public static final int USER_ID = 0;
@@ -52,7 +52,7 @@ public class SellaAssistContract {
         public static final int USER_PROFILE_PIC = 4;
         public static final int USER_DEVICEID = 5;
         public static final int USER_LOGGED_IN = 6;
-        public static final int USER_BUSINESS_UNIT = 7;
+        public static final int USER_BUSINESS_UNIT_NAME = 7;
 
         public static Uri buildUserUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
