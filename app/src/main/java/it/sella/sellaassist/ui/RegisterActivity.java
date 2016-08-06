@@ -273,7 +273,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void registerSuccess(User user) {
         finish();
         Intent i = new Intent(this, MainActivity.class)
-                .putExtra(Utility.USER_KEY, user);
+                .putExtra(Utility.USER_GBS_ID_KEY, user);
         startActivity(i);
     }
 

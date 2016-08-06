@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        user = getIntent().getParcelableExtra(Utility.USER_KEY);
+        user = getIntent().getParcelableExtra(Utility.USER_GBS_ID_KEY);
         if (user != null) {
             ((TextView) navigationView.getHeaderView(0).findViewById(R.id.navigation_header_name)).setText(user.getName());
             ((TextView) navigationView.getHeaderView(0).findViewById(R.id.navigation_header_gbsid)).setText(user.getGbsID());
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .into((ImageView) navigationView.getHeaderView(0).findViewById(R.id.navigation_header_profile_image));
         }
 
-        SellaCache.putCache(Utility.USER_KEY, user.getGbsID(), this);
+        SellaCache.putCache(Utility.USER_GBS_ID_KEY, user.getGbsID(), this);
 
         SellaAssistSyncAdapter.initializeSyncAdapter(this);
     }
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_logout) {
             finish();
             Intent i = new Intent(this, LoginActivity.class);
-            i.putExtra(Utility.USER_KEY, user);
+            i.putExtra(Utility.USER_GBS_ID_KEY, user);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);

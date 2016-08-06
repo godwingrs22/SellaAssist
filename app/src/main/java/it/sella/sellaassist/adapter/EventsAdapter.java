@@ -278,7 +278,7 @@ public class EventsAdapter extends RecyclerViewCursorAdapter<EventsAdapter.Event
         protected Boolean doInBackground(String... params) {
             try {
                 Thread.sleep(1000);
-                final String gbsId = SellaCache.getCache(Utility.USER_KEY, "", context);
+                final String gbsId = SellaCache.getCache(Utility.USER_GBS_ID_KEY, "", context);
                 EventManager eventManager = new EventManager(context);
                 if (eventManager.doInterestedEvent(gbsId, event.getId())) {
                     updateEvent(event);

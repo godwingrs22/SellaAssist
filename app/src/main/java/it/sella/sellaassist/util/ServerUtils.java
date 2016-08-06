@@ -9,7 +9,7 @@ public class ServerUtils {
     public final static String PORT_NO = "8080";
     private final static String NOTIFICATION_API = "/biot/rest/notifications";
     private final static String REGISTER_API = "/biot/rest/notifications/user";
-    private final static String LOGIN_API = "/biot/rest/notifications";
+    private final static String LOGIN_API = "/biot/rest/admin/user";
     private final static String IMAGE_API = "/biot/static/images";
     private final static String EVENTS_API = "/biot/rest/communications/events";
     private final static String BIOMETRIC_API = "/biot/rest/admin/biometric";

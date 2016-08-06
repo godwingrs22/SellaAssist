@@ -120,7 +120,7 @@ public class FeedsFragment extends Fragment implements LoaderManager.LoaderCallb
                 feedUri,
                 FeedEntry.FEED_PROJECTIONS,
                 SellaAssistContract.UserEntry.COLUMN_GBS_ID + " =?",
-                new String[]{SellaCache.getCache(Utility.USER_KEY, "", getContext())},
+                new String[]{SellaCache.getCache(Utility.USER_GBS_ID_KEY, "", getContext())},
                 FeedEntry.COLUMN_FEED_ID + " DESC");
     }
 

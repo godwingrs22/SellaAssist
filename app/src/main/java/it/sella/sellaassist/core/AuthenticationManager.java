@@ -9,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -95,20 +94,6 @@ public class AuthenticationManager {
         return true;
     }
 
-    public boolean doLogin(String gbsID, String password) {
-        boolean isSuccess;
-        try {
-            URL url = new URL(ServerUtils.getLoginURL());
-            String input = buildLoginJSONInput(gbsID, password);
-            String response = httpClient.getResponse(url, HttpClient.HTTP_POST, input, HttpClient.TIMEOUT);
-            isSuccess = isLoginSuccessful(response);
-        } catch (Exception e) {
-            Log.e(TAG, "Exception ", e);
-            isSuccess = false;
-        }
-        return isSuccess;
-    }
-
     private String buildRegisterJSONInput(User user, BusinessUnit businessUnit, Bitmap bitmap) {
         final String REGISTER_USERCODE = "userCode";
         final String REGISTER_DEVICE_ID = "userDeviceId";
@@ -163,6 +148,42 @@ public class AuthenticationManager {
             Log.e(TAG, "Exception ", e);
         }
         return loginJSON.toString();
+    }
+
+    public User doLogin(String gbsID, String password) {
+        User user = null;
+        try {
+            URL url = new URL(ServerUtils.getLoginURL());
+            String input = buildLoginJSONInput(gbsID, password);
+            String response = httpClient.getResponse(url, HttpClient.HTTP_POST, input, 0);
+            user = getUserFromLoginJson(response);
+        } catch (Exception e) {
+            Log.e(TAG, "Exception ", e);
+        }
+        return user;
+    }
+
+    private User getUserFromLoginJson(String response) {
+        final String LOGIN_USER = "currentUser";
+        final String LOGIN_USER_CODE = "code";
+        final String LOGIN_USER_NAME = "name";
+        final String LOGIN_USER_IMAGE = "image";
+
+        try {
+            JSONObject responseJSON = new JSONObject(response);
+            JSONObject userJSON = responseJSON.getJSONObject(LOGIN_USER);
+            if (userJSON != null) {
+                User user = new User(Parcel.obtain());
+                user.setGbsID(userJSON.getString(LOGIN_USER_CODE));
+                user.setName(userJSON.getString(LOGIN_USER_NAME));
+                user.setProfilePic(ServerUtils.getServerURL() + userJSON.getString(LOGIN_USER_IMAGE));
+
+                return user;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Exception ", e);
+        }
+        return null;
     }
 
     private boolean isLoginSuccessful(String response) {

@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        User user = getIntent().getParcelableExtra(Utility.USER_KEY);
+        User user = getIntent().getParcelableExtra(Utility.USER_GBS_ID_KEY);
         if (user != null && user.isLoggedIn()) {
             user.setLoggedIn(false);
 
@@ -174,20 +174,24 @@ public class LoginActivity extends AppCompatActivity {
 
         } else {
             Log.e(TAG, "<-----User not in internal db---->");
-            if (authenticationManager.doLogin(gbsID, password)) {
-                User user = new User(Parcel.obtain());
-                user.setGbsID(gbsID);
+            User user = authenticationManager.doLogin(gbsID, password);
+            if (user != null) {
                 user.setPassword(password);
                 user.setLoggedIn(true);
 
                 ContentValues userValues = new ContentValues();
                 userValues.put(SellaAssistContract.UserEntry.COLUMN_GBS_ID, user.getGbsID());
+                userValues.put(SellaAssistContract.UserEntry.COLUMN_NAME, user.getName());
                 userValues.put(SellaAssistContract.UserEntry.COLUMN_PASSWORD, user.getPassword());
+                userValues.put(SellaAssistContract.UserEntry.COLUMN_PROFILE_PIC, user.getProfilePic());
+                userValues.put(SellaAssistContract.UserEntry.COLUMN_DEVICEID, user.getDeviceId());
                 userValues.put(SellaAssistContract.UserEntry.COLUMN_LOGGED_IN, String.valueOf(user.isLoggedIn()));
+                userValues.put(SellaAssistContract.UserEntry.COLUMN_BUSINESS_UNIT_NAME, user.getBusinessUnitName());
 
                 getContentResolver().insert(SellaAssistContract.UserEntry.CONTENT_URI, userValues);
 
                 Log.v(TAG, "<-----Login Successful---->");
+
                 return user;
             }
         }
@@ -202,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
 //        sellaAssitProvider.updateUser(user);
         finish();
         Intent i = new Intent(this, MainActivity.class)
-                .putExtra(Utility.USER_KEY, user);
+                .putExtra(Utility.USER_GBS_ID_KEY, user);
         startActivity(i);
     }
 

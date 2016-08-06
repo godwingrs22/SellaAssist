@@ -89,7 +89,7 @@ public class SplashActivity extends AppCompatActivity {
             if (user != null && user.isLoggedIn()) {
                 Log.v(TAG, "<----User Already Logged In---->" + user);
                 Intent i = new Intent(getApplicationContext(), MainActivity.class)
-                        .putExtra(Utility.USER_KEY, user);
+                        .putExtra(Utility.USER_GBS_ID_KEY, user);
                 startActivity(i);
             } else {
                 Log.e(TAG, "<----User Not Logged In---->" + user);

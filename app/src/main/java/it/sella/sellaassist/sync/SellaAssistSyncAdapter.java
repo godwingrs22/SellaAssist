@@ -49,7 +49,7 @@ public class SellaAssistSyncAdapter extends AbstractThreadedSyncAdapter {
         Log.v(TAG, "<-------Starting sync------>");
 
         try {
-            Cursor cursor = getContext().getContentResolver().query(SellaAssistContract.UserEntry.CONTENT_URI, SellaAssistContract.UserEntry.USER_PROJECTION, SellaAssistProvider.userWithIdSelection, new String[]{SellaCache.getCache(Utility.USER_KEY, "", getContext())}, null);
+            Cursor cursor = getContext().getContentResolver().query(SellaAssistContract.UserEntry.CONTENT_URI, SellaAssistContract.UserEntry.USER_PROJECTION, SellaAssistProvider.userWithIdSelection, new String[]{SellaCache.getCache(Utility.USER_GBS_ID_KEY, "", getContext())}, null);
 
 
             if (cursor.moveToFirst()) {

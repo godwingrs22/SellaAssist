@@ -38,7 +38,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
  */
 public class Utility {
 
-    public static final String USER_KEY = "it.sella.sellaassist.user";
+    public static final String USER_GBS_ID_KEY = "it.sella.sellaassist.user.id";
     public static final String FEED_KEY = "it.sella.sellaassist.feed";
     public static final String EVENTS_KEY = "it.sella.sellaassist.event";
 
