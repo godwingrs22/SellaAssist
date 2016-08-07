@@ -3,6 +3,7 @@ package it.sella.sellaassist.ui;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private User user;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +59,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         if (savedInstanceState == null) {
             navigationView.getMenu().performIdentifierAction(R.id.item_navigation_drawer_feeds, 0);
-
         }
 
         user = getIntent().getParcelableExtra(Utility.USER_GBS_ID_KEY);
@@ -83,6 +84,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SellaCache.putCache(Utility.USER_GBS_ID_KEY, user.getGbsID(), this);
 
         SellaAssistSyncAdapter.initializeSyncAdapter(this);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+        actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -120,6 +134,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
 
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
         if (id == R.id.action_logout) {
             finish();
             Intent i = new Intent(this, LoginActivity.class);
@@ -137,6 +155,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        if (item.isChecked())
+            item.setChecked(false);
+        else
+            item.setChecked(true);
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        setTitle(item.getTitle());
+
         Fragment fragment = null;
         Class fragmentClass = null;
         switch (item.getItemId()) {
@@ -215,9 +243,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         }
-
-        item.setChecked(true);
-        drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
     }

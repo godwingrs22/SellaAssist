@@ -80,7 +80,7 @@ public class AuthenticationManager {
     }
 
     public boolean doRegister(User user, BusinessUnit businessUnit, Bitmap bitmap) {
-        boolean isSuccess = false;
+      /*  boolean isSuccess = false;
         try {
             URL url = new URL(ServerUtils.getRegisterURL());
             String input = buildRegisterJSONInput(user, businessUnit, bitmap);
@@ -90,8 +90,8 @@ public class AuthenticationManager {
             Log.e(TAG, "Exception ", e);
             isSuccess = false;
         }
-        return isSuccess;
-        // return true;
+        return isSuccess;*/
+        return true;
     }
 
     private String buildRegisterJSONInput(User user, BusinessUnit businessUnit, Bitmap bitmap) {

@@ -4,56 +4,66 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/item_navigation_drawer_feeds"
-            android:checked="true"
+            android:checked="false"
             android:icon="@drawable/ic_home_black_48dp"
             android:title="New Feeds" />
         <item
             android:id="@+id/item_navigation_drawer_biometric"
-            android:checked="true"
+            android:checked="false"
             android:icon="@drawable/ic_date_range_black_48dp"
             android:title="Biometric" />
         <item
             android:id="@+id/item_navigation_drawer_events"
-            android:checked="true"
+            android:checked="false"
             android:icon="@drawable/ic_event_black_48dp"
             android:title="Events" />
         <item
             android:id="@+id/item_navigation_drawer_lms"
-            android:checked="true"
+            android:checked="false"
             android:icon="@drawable/ic_assignment_turned_in_black_48dp"
             android:title="LMS" />
 
     </group>
     <item android:title="Settings">
         <menu>
-            <item
-                android:id="@+id/item_navigation_drawer_device_settings"
-                android:icon="@drawable/ic_settings_black_48dp"
-                android:title="Settings" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/item_navigation_drawer_device_settings"
+                    android:checked="false"
+                    android:icon="@drawable/ic_settings_black_48dp"
+                    android:title="Settings" />
+            </group>
         </menu>
     </item>
     <item android:title="Support">
         <menu>
-            <item
-                android:id="@+id/item_navigation_drawer_about"
-                android:icon="@drawable/ic_info_black_48dp"
-                android:title="About" />
-            <item
-                android:id="@+id/item_navigation_drawer_rateus"
-                android:icon="@drawable/ic_star_half_black_48dp"
-                android:title="Rate Us" />
-            <item
-                android:id="@+id/item_navigation_drawer_share"
-                android:icon="@drawable/ic_share_black_48dp"
-                android:title="Share" />
-            <item
-                android:id="@+id/item_navigation_drawer_contact_us"
-                android:icon="@drawable/ic_email_black_48dp"
-                android:title="Contact Us" />
-            <item
-                android:id="@+id/item_navigation_drawer_help_and_feedback"
-                android:icon="@drawable/ic_help_black_48dp"
-                android:title="Help and feedback" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/item_navigation_drawer_about"
+                    android:checked="false"
+                    android:icon="@drawable/ic_info_black_48dp"
+                    android:title="About" />
+                <item
+                    android:id="@+id/item_navigation_drawer_rateus"
+                    android:checked="false"
+                    android:icon="@drawable/ic_star_half_black_48dp"
+                    android:title="Rate Us" />
+                <item
+                    android:id="@+id/item_navigation_drawer_share"
+                    android:checked="false"
+                    android:icon="@drawable/ic_share_black_48dp"
+                    android:title="Share" />
+                <item
+                    android:id="@+id/item_navigation_drawer_contact_us"
+                    android:checked="false"
+                    android:icon="@drawable/ic_email_black_48dp"
+                    android:title="Contact Us" />
+                <item
+                    android:id="@+id/item_navigation_drawer_help_and_feedback"
+                    android:checked="false"
+                    android:icon="@drawable/ic_help_black_48dp"
+                    android:title="Help and feedback" />
+            </group>
         </menu>
     </item>
 

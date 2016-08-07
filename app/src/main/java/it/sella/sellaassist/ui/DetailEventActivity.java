@@ -38,6 +38,8 @@ public class DetailEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_event);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.getBackground().setAlpha(0);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -56,7 +58,7 @@ public class DetailEventActivity extends AppCompatActivity {
         TextView date = (TextView) findViewById(R.id.detail_event_date);
         TextView timeStamp = (TextView) findViewById(R.id.detail_event_time);
         TextView address = (TextView) findViewById(R.id.detail_event_address);
-        RadioGroup interestedGroup = (RadioGroup) findViewById(R.id.detail_event_interested);
+        interestedGroup = (RadioGroup) findViewById(R.id.detail_event_interested);
 
         description.setText(event.getDescription());
         createdByName.setText(event.getCreatedByName());
@@ -102,6 +104,9 @@ public class DetailEventActivity extends AppCompatActivity {
                 .error(R.drawable.event_placeholder)
                 .into(eventBannerImage);
 
+        eventBannerImage.setAdjustViewBounds(true);
+        eventBannerImage.setScaleType(ImageView.ScaleType.FIT_XY);
+
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +114,6 @@ public class DetailEventActivity extends AppCompatActivity {
                 calendarManager.addCalendarEvent(event);
             }
         });
-
     }
 
     @Override
