@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="it.sella.sellaassist">
+    package="it.sella.assist">
 
     <uses-permission
         android:name="android.permission.CAMERA"
@@ -34,14 +34,14 @@
 
 
     <application
-        android:name=".AppController"
+        android:name="it.sella.assist.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.SplashActivity"
+            android:name="it.sella.assist.ui.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
@@ -51,36 +51,48 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.LoginActivity"
+            android:name="it.sella.assist.ui.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".ui.RegisterActivity"
+            android:name="it.sella.assist.ui.RegisterActivity"
             android:label="@string/title_activity_register" />
         <activity
-            android:name=".ui.BiometricAddActivity"
+            android:name="it.sella.assist.ui.BiometricAddActivity"
             android:label="@string/title_activity_biometric_add"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name="it.sella.assist.ui.MainActivity"
             android:label="@string/title_activity_main" />
         <activity
-            android:name=".ui.PermissionActivity"
+            android:name="it.sella.assist.ui.PermissionActivity"
             android:label="@string/title_activity_permission" />
         <activity
-            android:name=".ui.FullScreenImageActivity"
+            android:name="it.sella.assist.ui.FullScreenImageActivity"
             android:label="@string/title_activity_fullscreen" />
         <activity
-            android:name=".ui.DetailEventActivity"
+            android:name="it.sella.assist.ui.DetailEventActivity"
             android:label="@string/title_activity_detail_event"
             android:theme="@style/AppTheme"></activity>
 
         <provider
-            android:name=".data.SellaAssistProvider"
-            android:authorities="it.sella.sellaassist.app"
+            android:name="it.sella.assist.data.SellaAssistProvider"
+            android:authorities="it.sella.assist.provider"
+            android:label="SellaAssit Provider"
+            android:multiprocess="true"
             android:exported="false"
             android:syncable="true" />
 
-        <service android:name=".sync.SellaAssistAuthenticatorService">
+        <service
+            android:name=".service.FeedService"
+            android:exported="false" />
+        <service
+            android:name=".service.EventService"
+            android:exported="false" />
+        <service
+            android:name=".service.BiometricService"
+            android:exported="false" />
+
+        <service android:name="it.sella.assist.sync.SellaAssistAuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
@@ -90,7 +102,7 @@
         </service>
 
         <service
-            android:name=".sync.SellaAssistSyncService"
+            android:name="it.sella.assist.sync.SellaAssistSyncService"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />

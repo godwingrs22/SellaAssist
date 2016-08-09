@@ -49,8 +49,8 @@
     <string name="prompt_location">Location</string>
     <string name="action_add">Add</string>
 
-    <string name="sync_account_type">sellaassist.sella.it</string>
-    <string name="content_authority">it.sella.sellaassist.app</string>
+    <string name="sync_account_type">assist.sella.it</string>
+    <string name="content_authority">it.sella.assist.provider</string>
 
     <string name="prompt_businessunit">Business Unit</string>
     <string name="error_business_unit_failed">Please select a business unit</string>
