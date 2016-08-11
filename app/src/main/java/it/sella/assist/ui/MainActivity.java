@@ -24,8 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.estimote.sdk.SystemRequirementsChecker;
-import com.squareup.picasso.Picasso;
 
 import it.sella.assist.R;
 import it.sella.assist.data.SellaAssistContract;
@@ -76,10 +76,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (user != null) {
             ((TextView) navigationView.getHeaderView(0).findViewById(R.id.navigation_header_name)).setText(user.getName());
             ((TextView) navigationView.getHeaderView(0).findViewById(R.id.navigation_header_gbsid)).setText(user.getGbsID());
-            Picasso.with(getApplicationContext())
+
+            Glide.with(getApplicationContext())
                     .load(Uri.parse(user.getProfilePic()))
                     .placeholder(R.drawable.ic_account_circle_white_48dp)
                     .error(R.drawable.ic_account_circle_white_48dp)
+                    .override(256, 256)
+                    .crossFade()
                     .into((ImageView) navigationView.getHeaderView(0).findViewById(R.id.navigation_header_profile_image));
         }
 

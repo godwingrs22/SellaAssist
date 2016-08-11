@@ -12,7 +12,7 @@ import it.sella.assist.data.SellaAssistContract.UserEntry;
 
 public class SellaAssistDBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     static final String DATABASE_NAME = "sellaAssist.db";
 
     public SellaAssistDBHelper(Context context) {
@@ -45,7 +45,7 @@ public class SellaAssistDBHelper extends SQLiteOpenHelper {
                 FeedEntry.COLUMN_MESSAGE + " TEXT, " +
                 FeedEntry.COLUMN_IMAGE + " TEXT, " +
                 FeedEntry.COLUMN_URL + " TEXT, " +
-                " UNIQUE (" + FeedEntry.COLUMN_FEED_ID + ") ON CONFLICT REPLACE, " +
+                " UNIQUE (" + FeedEntry.COLUMN_FEED_ID + ") ON CONFLICT IGNORE, " +
                 " FOREIGN KEY (" + FeedEntry.COLUMN_GBS_ID + ") REFERENCES " +
                 UserEntry.TABLE_NAME + " (" + UserEntry.COLUMN_GBS_ID + "))";
 

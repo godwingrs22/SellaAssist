@@ -2,7 +2,6 @@ package it.sella.assist.core;
 
 import android.content.Context;
 import android.net.ParseException;
-import android.net.Uri;
 import android.os.Parcel;
 import android.util.Log;
 
@@ -10,14 +9,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
-import it.sella.assist.AppController;
 import it.sella.assist.http.HttpClient;
 import it.sella.assist.model.Feed;
 import it.sella.assist.util.ServerUtils;
+import okhttp3.HttpUrl;
 
 /**
  * Created by GodwinRoseSamuel on 23-Jul-16.
@@ -25,7 +23,6 @@ import it.sella.assist.util.ServerUtils;
 public class FeedsManager {
     private static final String TAG = FeedsManager.class.getSimpleName();
     private static final String NOTIFICATIONS_PARAM = "notification";
-    private final HttpClient httpClient = AppController.getInstance().getHttpClient();
     private Context context;
 
     public FeedsManager(Context context) {
@@ -34,14 +31,17 @@ public class FeedsManager {
 
     public List<Feed> loadFeeds(String gbsCode, int beaconId) {
         List<Feed> feeds = new LinkedList<>();
-        final Uri builtUri = Uri.parse(ServerUtils.getNotificationURL()).buildUpon()
-                .appendPath(gbsCode)
-                .appendPath(Integer.toString(beaconId))
-                .appendPath(NOTIFICATIONS_PARAM)
-                .build();
         try {
-            URL url = new URL(builtUri.toString());
-            final String feedData = httpClient.getResponse(url, HttpClient.HTTP_GET, null, 0);
+            final HttpUrl httpUrl = new HttpUrl.Builder()
+                    .scheme(ServerUtils.HTTP_PROTOCOL)
+                    .host(ServerUtils.HOSTNAME)
+                    .port(ServerUtils.PORT_NO)
+                    .addPathSegments(ServerUtils.NOTIFICATION_API)
+                    .addPathSegment(gbsCode)
+                    .addPathSegment(Integer.toString(beaconId))
+                    .addPathSegment(NOTIFICATIONS_PARAM)
+                    .build();
+            final String feedData = HttpClient.GET(httpUrl);
             feeds = getFeedDataFromJson(feedData, gbsCode);
         } catch (Exception e) {
             Log.e(TAG, "Exception ", e);

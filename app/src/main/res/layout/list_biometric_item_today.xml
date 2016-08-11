@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?colorPrimary"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/list_item_date_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Today, Aug 08"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/md_white_1000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_large_30dp"
+        android:layout_marginStart="@dimen/padding_large_30dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_medium_10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/padding_large_30dp"
+            android:paddingStart="@dimen/padding_large_30dp">
+
+            <TextView
+                android:id="@+id/list_item_high_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10:20 AM"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/md_white_1000" />
+
+            <TextView
+                android:id="@+id/list_item_low_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="07:00 PM"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/md_white_1000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/list_item_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/gross" />
+
+            <TextView
+                android:id="@+id/list_item_forecast_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-condensed"
+                android:text="16:00"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/md_white_1000" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

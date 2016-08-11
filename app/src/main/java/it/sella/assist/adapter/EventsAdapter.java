@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import it.sella.assist.R;
 import it.sella.assist.core.CalendarManager;
@@ -117,17 +117,19 @@ public class EventsAdapter extends RecyclerViewCursorAdapter<EventsAdapter.Event
             final EventDAO eventDAO = new EventDAO(context);
             final Event event = eventDAO.getEvent(cursor);
 
-            Picasso.with(context)
+            Glide.with(context)
                     .load(Uri.parse(event.getBannerImage()))
                     .placeholder(R.drawable.image_placeholder)
                     .error(R.drawable.event_placeholder)
+                    .crossFade()
                     .into(bannerImage);
             bannerImage.setAdjustViewBounds(true);
 
-            Picasso.with(context)
+            Glide.with(context)
                     .load(Uri.parse(event.getCreatedByProfileImage()))
                     .placeholder(R.drawable.image_placeholder)
                     .error(R.drawable.image_placeholder)
+                    .crossFade()
                     .into(profileImage);
 
             createdByName.setText(event.getCreatedByName());

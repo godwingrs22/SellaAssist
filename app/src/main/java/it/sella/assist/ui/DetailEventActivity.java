@@ -14,7 +14,8 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+
+import com.bumptech.glide.Glide;
 
 import it.sella.assist.R;
 import it.sella.assist.core.CalendarManager;
@@ -36,7 +37,7 @@ public class DetailEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_event);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.getBackground().setAlpha(0);
+//        toolbar.getBackground().setAlpha(0);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,16 +92,19 @@ public class DetailEventActivity extends AppCompatActivity {
             }
         });
 
-        Picasso.with(this)
+        Glide.with(this)
                 .load(Uri.parse(event.getCreatedByProfileImage()))
                 .placeholder(R.drawable.image_placeholder)
+                .override(256,256)
                 .error(R.drawable.image_placeholder)
+                .crossFade()
                 .into(profileImage);
 
-        Picasso.with(this)
+        Glide.with(this)
                 .load(Uri.parse(event.getBannerImage()))
                 .placeholder(R.drawable.image_placeholder)
                 .error(R.drawable.event_placeholder)
+                .crossFade()
                 .into(eventBannerImage);
 
         eventBannerImage.setAdjustViewBounds(true);

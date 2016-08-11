@@ -41,7 +41,6 @@ public class FeedDAO {
     public void addFeed(Feed feed) {
         Log.v(TAG, "<-----Adding Feed---->" + feed);
         context.getContentResolver().insert(FeedEntry.CONTENT_URI, createFeedContentValues(feed));
-        notifyChange();
     }
 
 
@@ -56,7 +55,6 @@ public class FeedDAO {
             feedVector.toArray(feedArray);
             context.getContentResolver().bulkInsert(FeedEntry.CONTENT_URI, feedArray);
             Log.v(TAG, "<-----" + feedVector.size() + " feeds inserted------->");
-            notifyChange();
         }
     }
 

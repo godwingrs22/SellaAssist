@@ -20,6 +20,7 @@ import it.sella.assist.model.BiometricInfo;
 import it.sella.assist.service.FeedService;
 import it.sella.assist.util.SharedPreferenceManager;
 import it.sella.assist.util.Utility;
+import okhttp3.OkHttpClient;
 
 
 /**
@@ -29,7 +30,7 @@ import it.sella.assist.util.Utility;
 public class AppController extends Application {
     private static final String TAG = AppController.class.getSimpleName();
     private static AppController appController;
-    private HttpClient httpClient;
+    private OkHttpClient okHttpClient;
     private BeaconManager beaconManager;
     private static final String ESTIMOTE_PROXIMITY_UUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
 
@@ -95,10 +96,10 @@ public class AppController extends Application {
         return appController;
     }
 
-    public HttpClient getHttpClient() {
-        if (httpClient == null) {
-            httpClient = new HttpClient();
+    public OkHttpClient getOkHttpClient() {
+        if (okHttpClient == null) {
+            okHttpClient = new OkHttpClient();
         }
-        return httpClient;
+        return okHttpClient;
     }
 }

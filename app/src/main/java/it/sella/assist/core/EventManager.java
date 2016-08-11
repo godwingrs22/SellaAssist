@@ -1,9 +1,7 @@
 package it.sella.assist.core;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.net.ParseException;
-import android.net.Uri;
 import android.os.Parcel;
 import android.util.Log;
 
@@ -17,21 +15,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 
-import it.sella.assist.AppController;
-import it.sella.assist.data.SellaAssistContract;
 import it.sella.assist.http.HttpClient;
 import it.sella.assist.model.Event;
 import it.sella.assist.ui.EventsFragment;
 import it.sella.assist.util.ServerUtils;
+import okhttp3.HttpUrl;
 
 /**
  * Created by GodwinRoseSamuel on 29-Jul-16.
  */
 public class EventManager {
     private static final String TAG = FeedsManager.class.getSimpleName();
-    private final HttpClient httpClient = AppController.getInstance().getHttpClient();
     private Context context;
     private static final String SUCCESS_CODE = "BIOK";
     private static final String FAILURE_CODE = "BIKO";
@@ -43,13 +38,16 @@ public class EventManager {
     public boolean doInterestedEvent(String gbsCode, int eventId) {
         Boolean isSuccess = false;
         try {
-            final Uri builtUri = Uri.parse(ServerUtils.getInterestedEventsURL()).buildUpon()
-                    .appendPath(gbsCode)
-                    .appendPath(Integer.toString(eventId))
+            final HttpUrl httpUrl = new HttpUrl.Builder()
+                    .scheme(ServerUtils.HTTP_PROTOCOL)
+                    .host(ServerUtils.HOSTNAME)
+                    .port(ServerUtils.PORT_NO)
+                    .addPathSegments(ServerUtils.INTERESTED_EVENTS_API)
+                    .addPathSegment(gbsCode)
+                    .addPathSegment(Integer.toString(eventId))
                     .build();
-            URL url = new URL(builtUri.toString());
-            final String eventData = httpClient.getResponse(url, HttpClient.HTTP_GET, null, HttpClient.TIMEOUT);
-            isSuccess = isEventInterestedUpdatedSuccessful(eventData);
+            final String eventResponse = HttpClient.GET(httpUrl);
+            isSuccess = isEventInterestedUpdatedSuccessful(eventResponse);
         } catch (Exception e) {
             Log.e(TAG, "Exception ", e);
         }
@@ -75,10 +73,15 @@ public class EventManager {
     }
 
     public List<Event> loadEvents() {
-     List<Event> events = new LinkedList<>();
+        List<Event> events = new LinkedList<>();
         try {
-            URL url = new URL(ServerUtils.getEventsURL());
-            final String eventData = httpClient.getResponse(url, HttpClient.HTTP_GET, null, 0);
+            final HttpUrl httpUrl = new HttpUrl.Builder()
+                    .scheme(ServerUtils.HTTP_PROTOCOL)
+                    .host(ServerUtils.HOSTNAME)
+                    .port(ServerUtils.PORT_NO)
+                    .addPathSegments(ServerUtils.EVENTS_API)
+                    .build();
+            final String eventData = HttpClient.GET(httpUrl);
             events = getEventDataFromJson(eventData);
         } catch (Exception e) {
             Log.e(TAG, "Exception ", e);

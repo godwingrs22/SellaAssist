@@ -2,90 +2,42 @@ package it.sella.assist.http;
 
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
+import it.sella.assist.AppController;
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by GodwinRoseSamuel on 23-Jul-16.
  */
 public class HttpClient {
     private static final String TAG = HttpClient.class.getSimpleName();
-    public static final String HTTP_GET = "GET";
-    public static final String HTTP_POST = "POST";
-    public static final int TIMEOUT = 5000;
+    public static final MediaType APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");
 
-    HttpURLConnection urlConnection = null;
-    BufferedReader reader = null;
-    InputStream inputStream = null;
+    public static String GET(HttpUrl url) throws IOException {
+        Log.v(TAG, "<------Request URL----> " + url.toString());
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Response response = AppController.getInstance().getOkHttpClient().newCall(request).execute();
+        Log.v(TAG, "<------Is Response Successfull----> " + response.isSuccessful());
+        return response.body().string();
+    }
 
-    public String getResponse(final URL url, final String method, final String input, final int timeout) {
-        String response = null;
-        try {
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod(method);
-            Log.v(TAG, "<------Request URL----> " + url);
-
-            if (timeout != 0) {
-                urlConnection.setConnectTimeout(timeout);
-                urlConnection.setReadTimeout(timeout);
-            }
-
-            if (HTTP_POST.equals(method) && input != null) {
-                Log.v(TAG, "<------Input---->" + input);
-                urlConnection.setDoOutput(true);
-                urlConnection.setDoInput(true);
-                urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                OutputStream os = urlConnection.getOutputStream();
-                os.write(input.getBytes("UTF-8"));
-                os.close();
-            }
-
-            urlConnection.connect();
-            Log.v(TAG, "<------Response Code----> " + urlConnection.getResponseCode());
-            inputStream = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
-            if (inputStream == null) {
-                return null;
-            }
-            reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line + "\n");
-            }
-            if (buffer.length() == 0) {
-                return null;
-            }
-            response = buffer.toString();
-
-        } catch (IOException exception) {
-            Log.e(TAG, "Error ", exception);
-            return null;
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (final IOException e) {
-                    Log.e(TAG, "Error closing stream", e);
-                }
-            }
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        Log.v(TAG, "<------Http Response----> " + response);
-        return response;
+    public static String POST(HttpUrl url, String body) throws IOException {
+        Log.v(TAG, "<------Request URL----> " + url.toString());
+        RequestBody requestBody = RequestBody.create(APPLICATION_JSON, body);
+        Log.v(TAG, "<------RequestBody----> " + body);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+        Response response = AppController.getInstance().getOkHttpClient().newCall(request).execute();
+        Log.v(TAG, "<------Is Response Successfull----> " + response.isSuccessful());
+        return response.body().string();
     }
 }

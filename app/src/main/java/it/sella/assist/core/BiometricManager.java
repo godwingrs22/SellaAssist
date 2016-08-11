@@ -23,22 +23,27 @@ import it.sella.assist.http.HttpClient;
 import it.sella.assist.model.BiometricInfo;
 import it.sella.assist.model.User;
 import it.sella.assist.util.ServerUtils;
+import okhttp3.HttpUrl;
 
 /**
  * Created by GodwinRoseSamuel on 26-Jul-16.
  */
 public class BiometricManager {
     private static final String TAG = BiometricManager.class.getSimpleName();
-    private final HttpClient httpClient = AppController.getInstance().getHttpClient();
     private static final String SUCCESS_CODE = "BIOK";
     private static final String FAILURE_CODE = "BIKO";
 
     public boolean updateBiometricToServer(List<BiometricInfo> biometrics, String gbsId) {
         boolean isSuccess;
         try {
-            URL url = new URL(ServerUtils.getBiometricURL());
-            String input = buildBiometricJSONInput(biometrics, gbsId);
-            String response = httpClient.getResponse(url, HttpClient.HTTP_POST, input, HttpClient.TIMEOUT);
+            final HttpUrl httpUrl = new HttpUrl.Builder()
+                    .scheme(ServerUtils.HTTP_PROTOCOL)
+                    .host(ServerUtils.HOSTNAME)
+                    .port(ServerUtils.PORT_NO)
+                    .addPathSegments(ServerUtils.BIOMETRIC_API)
+                    .build();
+            final String input = buildBiometricJSONInput(biometrics, gbsId);
+            final String response =HttpClient.POST(httpUrl,input);
             isSuccess = isUpdateSuccessful(response);
         } catch (Exception e) {
             Log.e(TAG, "Exception ", e);

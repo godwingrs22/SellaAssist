@@ -48,7 +48,6 @@ public class EventDAO {
     public void addEvent(Event event) {
         Log.v(TAG, "<-----Adding Event---->" + event);
         context.getContentResolver().insert(EventEntry.CONTENT_URI, createEventContentValues(event));
-        notifyChange();
     }
 
 
@@ -63,7 +62,6 @@ public class EventDAO {
             eventVector.toArray(eventArray);
             context.getContentResolver().bulkInsert(EventEntry.CONTENT_URI, eventArray);
             Log.v(TAG, "<-----" + eventVector.size() + " events inserted------->");
-            notifyChange();
         }
     }
 
@@ -129,7 +127,6 @@ public class EventDAO {
         Log.v(TAG, "<-----eventUri---->" + eventUri);
 
         context.getContentResolver().update(eventUri, createEventContentValues(event), null, null);
-        notifyChange();
     }
 
     public void notifyChange() {

@@ -17,7 +17,9 @@
 
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
 
             <ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/biometric_switcher"
@@ -26,9 +28,9 @@
 
                 <ExpandableListView
                     android:id="@+id/biometric_item_list"
-                    android:background="@color/feed_bg"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:background="@color/feed_bg" />
 
                 <ImageView
                     android:id="@+id/biometric_error"
@@ -49,7 +51,6 @@
                 app:layout_anchor="@id/biometric_item_list"
                 app:layout_anchorGravity="bottom|right|end" />
         </android.support.design.widget.CoordinatorLayout>
-
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -74,6 +75,7 @@
                 android:drawablePadding="@dimen/activity_horizontal_margin"
                 android:drawableStart="@drawable/ic_date_range_white_24dp"
                 android:focusable="false"
+                android:inputType="date"
                 android:hint="From Date"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/md_white_1000"
@@ -87,6 +89,7 @@
                 android:drawableStart="@drawable/ic_date_range_white_24dp"
                 android:focusable="false"
                 android:hint="To Date"
+                android:inputType="date"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="@color/md_white_1000"
                 android:textColorHint="@color/md_white_1000" />

@@ -76,9 +76,7 @@
 
         <provider
             android:name="it.sella.assist.data.SellaAssistProvider"
-            android:authorities="it.sella.assist.provider"
-            android:label="SellaAssit Provider"
-            android:multiprocess="true"
+            android:authorities="@string/content_authority"
             android:exported="false"
             android:syncable="true" />
 

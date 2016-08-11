@@ -29,7 +29,7 @@ import it.sella.assist.util.Utility;
 public class SellaAssistSyncAdapter extends AbstractThreadedSyncAdapter {
     public final String TAG = SellaAssistSyncAdapter.class.getSimpleName();
 
-    public static final int SYNC_INTERVAL = 60 * 60;
+    public static final int SYNC_INTERVAL = 180;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL / 3;
     private static final long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
 

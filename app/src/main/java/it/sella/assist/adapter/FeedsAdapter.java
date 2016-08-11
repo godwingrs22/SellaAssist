@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import it.sella.assist.R;
 import it.sella.assist.data.SellaAssistContract;
@@ -122,25 +122,25 @@ public class FeedsAdapter extends RecyclerViewCursorAdapter<FeedsAdapter.FeedVie
 
             String profileImage = cursor.getString(SellaAssistContract.FeedEntry.FEED_PROFILE_PIC);
 
-            if (profileImage != null) {
-                Picasso.with(context)
-                        .load(Uri.parse(profileImage))
-                        .placeholder(R.drawable.profile_placeholder)
-                        .error(R.drawable.profile_placeholder)
-                        .into(this.profileImage);
-                this.profileImage.setVisibility(View.VISIBLE);
-            } else {
-                this.profileImage.setVisibility(View.GONE);
-            }
+            Glide.with(context)
+                    .load(Uri.parse(profileImage))
+                    .placeholder(R.drawable.profile_placeholder)
+                    .override(256, 256)
+                    .error(R.drawable.profile_placeholder)
+                    .crossFade()
+                    .into(this.profileImage);
 
             final String image = cursor.getString(SellaAssistContract.FeedEntry.FEED_IMAGE);
 
             if (image != null) {
-                Picasso.with(context)
+
+                Glide.with(context)
                         .load(Uri.parse(image))
                         .placeholder(R.drawable.image_placeholder)
                         .error(R.drawable.image_placeholder)
+                        .crossFade()
                         .into(this.image);
+
                 this.image.setVisibility(View.VISIBLE);
                 this.image.setAdjustViewBounds(true);
                 this.image.setScaleType(ImageView.ScaleType.FIT_XY);

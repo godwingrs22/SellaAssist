@@ -76,9 +76,6 @@ public class FeedsFragment extends Fragment implements LoaderManager.LoaderCallb
         TabLayout tabLayout = (TabLayout) appCompatActivity.findViewById(R.id.tabs);
         tabLayout.setVisibility(View.GONE);
 
-        MainActivity activity = (MainActivity) getActivity();
-        User user = activity.getUser();
-
         feedSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.feed_swipe_refresh);
         feedRecylerView = (RecyclerView) rootView.findViewById(R.id.feeds_item_list);
         viewSwitcher = (ViewSwitcher) rootView.findViewById(R.id.feeds_switcher);

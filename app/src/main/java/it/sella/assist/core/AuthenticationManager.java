@@ -8,23 +8,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import it.sella.assist.AppController;
 import it.sella.assist.http.HttpClient;
 import it.sella.assist.model.BusinessUnit;
 import it.sella.assist.model.User;
 import it.sella.assist.util.ServerUtils;
 import it.sella.assist.util.Utility;
+import okhttp3.HttpUrl;
 
 /**
  * Created by GodwinRoseSamuel on 29-Jul-16.
  */
 public class AuthenticationManager {
     private static final String TAG = AuthenticationManager.class.getSimpleName();
-    private final HttpClient httpClient = AppController.getInstance().getHttpClient();
     private static final String SUCCESS_CODE = "BIOK";
     private static final String FAILURE_CODE = "BIKO";
 
@@ -33,8 +31,13 @@ public class AuthenticationManager {
     public Map<String, BusinessUnit> getBusinessUnit() {
         String response = null;
         try {
-            URL url = new URL(ServerUtils.getBusinessUnitURL());
-            response = httpClient.getResponse(url, HttpClient.HTTP_GET, null, HttpClient.TIMEOUT);
+            HttpUrl httpUrl = new HttpUrl.Builder()
+                    .scheme(ServerUtils.HTTP_PROTOCOL)
+                    .host(ServerUtils.HOSTNAME)
+                    .port(ServerUtils.PORT_NO)
+                    .addPathSegments(ServerUtils.BUSINESS_UNIT_API)
+                    .build();
+            response = HttpClient.GET(httpUrl);
         } catch (Exception e) {
             Log.e(TAG, "Exception ", e);
         }
@@ -82,9 +85,15 @@ public class AuthenticationManager {
     public boolean doRegister(User user, BusinessUnit businessUnit, Bitmap bitmap) {
         boolean isSuccess;
         try {
-            URL url = new URL(ServerUtils.getRegisterURL());
-            String input = buildRegisterJSONInput(user, businessUnit, bitmap);
-            String response = httpClient.getResponse(url, HttpClient.HTTP_POST, input, 0);
+            final HttpUrl httpUrl = new HttpUrl.Builder()
+                    .scheme(ServerUtils.HTTP_PROTOCOL)
+                    .host(ServerUtils.HOSTNAME)
+                    .port(ServerUtils.PORT_NO)
+                    .addPathSegments(ServerUtils.REGISTER_API)
+                    .build();
+
+            final String input = buildRegisterJSONInput(user, businessUnit, bitmap);
+            final String response = HttpClient.POST(httpUrl, input);
             isSuccess = isRegisterSuccessful(response);
         } catch (Exception e) {
             Log.e(TAG, "Exception ", e);
@@ -153,9 +162,14 @@ public class AuthenticationManager {
     public User doLogin(String gbsID, String password) {
         User user = null;
         try {
-            URL url = new URL(ServerUtils.getLoginURL());
-            String input = buildLoginJSONInput(gbsID, password);
-            String response = httpClient.getResponse(url, HttpClient.HTTP_POST, input, 0);
+            final HttpUrl httpUrl = new HttpUrl.Builder()
+                    .scheme(ServerUtils.HTTP_PROTOCOL)
+                    .host(ServerUtils.HOSTNAME)
+                    .port(ServerUtils.PORT_NO)
+                    .addPathSegments(ServerUtils.LOGIN_API)
+                    .build();
+            final String input = buildLoginJSONInput(gbsID, password);
+            final String response = HttpClient.POST(httpUrl, input);
             user = getUserFromLoginJson(response);
         } catch (Exception e) {
             Log.e(TAG, "Exception ", e);
