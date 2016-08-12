@@ -24,7 +24,7 @@ public class HttpClient {
                 .url(url)
                 .build();
         Response response = AppController.getInstance().getOkHttpClient().newCall(request).execute();
-        Log.v(TAG, "<------Is Response Successfull----> " + response.isSuccessful());
+        Log.v(TAG, "<------Is Response Successful----> " + response.isSuccessful());
         return response.body().string();
     }
 
@@ -37,7 +37,7 @@ public class HttpClient {
                 .post(requestBody)
                 .build();
         Response response = AppController.getInstance().getOkHttpClient().newCall(request).execute();
-        Log.v(TAG, "<------Is Response Successfull----> " + response.isSuccessful());
+        Log.v(TAG, "<------Is Response Successful----> " + response.isSuccessful());
         return response.body().string();
     }
 }

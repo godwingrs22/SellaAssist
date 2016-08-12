@@ -46,6 +46,7 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         appController = this;
+
         beaconManager = new BeaconManager(getApplicationContext());
         beaconManager.setBackgroundScanPeriod(1000, 1000);
         beaconManager.setForegroundScanPeriod(1000, 1000);

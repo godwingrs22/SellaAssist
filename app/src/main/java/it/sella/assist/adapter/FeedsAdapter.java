@@ -7,13 +7,14 @@ import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import it.sella.assist.R;
 import it.sella.assist.data.SellaAssistContract;
@@ -120,26 +121,23 @@ public class FeedsAdapter extends RecyclerViewCursorAdapter<FeedsAdapter.FeedVie
                 this.url.setVisibility(View.GONE);
             }
 
-            String profileImage = cursor.getString(SellaAssistContract.FeedEntry.FEED_PROFILE_PIC);
-
-            Glide.with(context)
-                    .load(Uri.parse(profileImage))
+            String profileImageStr = cursor.getString(SellaAssistContract.FeedEntry.FEED_PROFILE_PIC);
+            Picasso.with(context)
+                    .load(Uri.parse(profileImageStr))
                     .placeholder(R.drawable.profile_placeholder)
-                    .override(256, 256)
+                    .resize(256, 256)
                     .error(R.drawable.profile_placeholder)
-                    .crossFade()
-                    .into(this.profileImage);
+                    .into(profileImage);
 
-            final String image = cursor.getString(SellaAssistContract.FeedEntry.FEED_IMAGE);
+            final String imageStr = cursor.getString(SellaAssistContract.FeedEntry.FEED_IMAGE);
 
-            if (image != null) {
+            if (imageStr != null) {
 
-                Glide.with(context)
-                        .load(Uri.parse(image))
+                Picasso.with(context)
+                        .load(Uri.parse(imageStr))
                         .placeholder(R.drawable.image_placeholder)
                         .error(R.drawable.image_placeholder)
-                        .crossFade()
-                        .into(this.image);
+                        .into(image);
 
                 this.image.setVisibility(View.VISIBLE);
                 this.image.setAdjustViewBounds(true);
@@ -148,7 +146,7 @@ public class FeedsAdapter extends RecyclerViewCursorAdapter<FeedsAdapter.FeedVie
                     @Override
                     public void onClick(View v) {
                         Intent fullScreenIntent = new Intent(v.getContext(), FullScreenImageActivity.class);
-                        fullScreenIntent.putExtra("image_url", image);
+                        fullScreenIntent.putExtra("image_url", imageStr);
                         context.startActivity(fullScreenIntent);
                     }
                 });

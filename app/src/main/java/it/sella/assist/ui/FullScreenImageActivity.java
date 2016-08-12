@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import it.sella.assist.R;
 
@@ -32,11 +32,10 @@ public class FullScreenImageActivity extends AppCompatActivity {
         final ImageView imageView = (ImageView) findViewById(R.id.fullScreen_Image);
         imageView.setAdjustViewBounds(true);
 
-        Glide.with(this)
+        Picasso.with(this)
                 .load(Uri.parse(imageUrl))
                 .placeholder(R.drawable.image_placeholder)
                 .error(R.drawable.image_placeholder)
-                .crossFade()
                 .into(imageView);
     }
 

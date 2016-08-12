@@ -14,8 +14,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import it.sella.assist.R;
 import it.sella.assist.core.CalendarManager;
@@ -92,19 +91,17 @@ public class DetailEventActivity extends AppCompatActivity {
             }
         });
 
-        Glide.with(this)
+        Picasso.with(this)
                 .load(Uri.parse(event.getCreatedByProfileImage()))
-                .placeholder(R.drawable.image_placeholder)
-                .override(256,256)
-                .error(R.drawable.image_placeholder)
-                .crossFade()
+                .placeholder(R.drawable.profile_placeholder)
+                .resize(256, 256)
+                .error(R.drawable.profile_placeholder)
                 .into(profileImage);
 
-        Glide.with(this)
+        Picasso.with(this)
                 .load(Uri.parse(event.getBannerImage()))
                 .placeholder(R.drawable.image_placeholder)
                 .error(R.drawable.event_placeholder)
-                .crossFade()
                 .into(eventBannerImage);
 
         eventBannerImage.setAdjustViewBounds(true);
