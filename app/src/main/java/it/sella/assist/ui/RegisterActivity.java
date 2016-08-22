@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -221,7 +224,12 @@ public class RegisterActivity extends AppCompatActivity {
         user.setBusinessUnitName(businessUnit.getName());
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-            if (authenticationManager.doRegister(user, businessUnit, bitmap)) {
+
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 25, out);
+            Bitmap compressedBitmap = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
+
+            if (authenticationManager.doRegister(user, businessUnit, compressedBitmap)) {
                 Log.v(TAG, "<-----user registered---->" + user);
                 user.setLoggedIn(true);
                 userDAO.addUser(user);
@@ -288,7 +296,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void getImageFromDevice() {
-        final File root = new File(Environment.getExternalStorageDirectory() + File.separator + "SellaAssit" + File.separator);
+        final File root = new File(Environment.getExternalStorageDirectory() + File.separator + "SellaAssist" + File.separator);
         root.mkdirs();
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + ".jpg";
