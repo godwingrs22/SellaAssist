@@ -15,6 +15,7 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -71,8 +72,10 @@
             android:label="@string/title_activity_fullscreen" />
         <activity
             android:name="it.sella.assist.ui.DetailEventActivity"
-            android:label="@string/title_activity_detail_event"
-            android:theme="@style/AppTheme"></activity>
+            android:label="@string/title_activity_detail_event"></activity>
+        <activity
+            android:name="it.sella.assist.ui.SOSActivity"
+            android:label="@string/title_activity_sos"></activity>
 
         <provider
             android:name="it.sella.assist.data.SellaAssistProvider"

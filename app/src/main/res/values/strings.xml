@@ -23,10 +23,12 @@
     <string name="demo_password">12345</string>
     <string name="action_register">Register</string>
     <string name="action_login">Login</string>
+    <string name="action_help">Request Help</string>
 
     <string name="title_activity_register">Register</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_main">SellaAssist</string>
+    <string name="title_activity_sos">SOS</string>
 
     <string name="navigation_header_gbsid">Demo</string>
     <string name="navigation_header_email">demo@sella.it</string>
@@ -62,5 +64,9 @@
         <item>Architecture</item>
         <item>Guest</item>
         <item>Sella Branch</item>
+    </string-array>
+
+    <string-array name="sos_phoneno">
+        <item>+919597474017</item>
     </string-array>
 </resources>

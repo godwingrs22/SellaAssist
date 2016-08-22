@@ -218,7 +218,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.item_navigation_drawer_rateus:
                 break;
-            case R.id.item_navigation_drawer_device_settings:
+            case R.id.item_navigation_drawer_device_sos:
+                Intent intent = new Intent(this, SOSActivity.class);
+                startActivity(intent);
                 break;
             case R.id.item_navigation_drawer_contact_us:
                 try {

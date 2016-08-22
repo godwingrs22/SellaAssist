@@ -24,14 +24,14 @@
             android:title="LMS" />
 
     </group>
-    <item android:title="Settings">
+    <item android:title="Emergency">
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/item_navigation_drawer_device_settings"
+                    android:id="@+id/item_navigation_drawer_device_sos"
                     android:checked="false"
-                    android:icon="@drawable/ic_settings_black_48dp"
-                    android:title="Settings" />
+                    android:icon="@drawable/ic_report_black_48dp"
+                    android:title="SOS" />
             </group>
         </menu>
     </item>
